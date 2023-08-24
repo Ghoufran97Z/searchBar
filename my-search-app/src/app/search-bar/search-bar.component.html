@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="input-group mb-3 searchDesign">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search..."
+      aria-label="Search"
+      aria-describedby="basic-addon2"
+      [(ngModel)]="searchQuery"
+      (input)="search()"
+      (input)="updateTotalResults()"
+    />
+    <div class="input-group-append">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="clearSearch()"
+      >
+        x
+      </button>
+    </div>
+  </div>
+  <div class="results-count">
+    <h4>
+      <b>{{ totalResults }} posts</b> were found.
+    </h4>
+  </div>
+
+  <div class="contents">
+    <ng-container *ngFor="let article of filteredArticles">
+      <h1 [innerHTML]="highlight(article.title, searchQuery)"></h1>
+      <h3 class="date" [innerHTML]="highlight(article.date, searchQuery)"></h3>
+      <p [innerHTML]="highlight(article.content, searchQuery)"></p>
+      <h1
+        class="title2"
+        [innerHTML]="highlight(article.title2, searchQuery)"
+      ></h1>
+    </ng-container>
+  </div>
+</div>
